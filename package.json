@@ -1,0 +1,19 @@
+{
+  "name": "fookie-limiter",
+  "version": "0.0.1",
+  "description": "s",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fookiejs/limiter.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fookiejs/limiter/issues"
+  },
+  "homepage": "https://github.com/fookiejs/limiter#readme"
+}
