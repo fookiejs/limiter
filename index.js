@@ -139,7 +139,7 @@ module.exports.client = function (selected_db) {
 
         const res = await ctx.run({
             model: "mixin",
-            method: "read",
+            method: "update",
             token: true,
             body: {
                 object: before.object
