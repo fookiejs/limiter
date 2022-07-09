@@ -86,6 +86,8 @@ module.exports.client = function (selected_db) {
             name: "check_limit",
             function: async function (payload, ctx, state) {
                 try {
+                    if (payload.method == "read" && payload.model == "limit") { return true }
+
                     const limit_req = await ctx.run({
                         token: true,
                         model: "limit",
@@ -97,13 +99,12 @@ module.exports.client = function (selected_db) {
                             }
                         }
                     })
-                    if (limit_req.data.length <= 0) {
-                        console.log("dont need limit");
+                    if (limit_req.data.length == 0) {
                         return true
                     }
                     const limit_ms = limit_req.data[0].ms
                     const create_history_req = await ctx.axios.post(process.env.CACHE, {
-                        model: request_history,
+                        model: "request_history",
                         method: "create",
                         token: process.env.SYSTEM_TOKEN,
                         body: {
@@ -116,14 +117,12 @@ module.exports.client = function (selected_db) {
                         }
                     })
                     const response = create_history_req.data
-                    if (response.status) {
-                        console.log(response);
-                        return true
+                    if (!response.status) {
+                        return false
                     }
                 } catch (error) {
-                    console.log(error);
                 }
-                return false
+                return true
             }
         })
 
