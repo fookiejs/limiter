@@ -1,49 +1,48 @@
-module.exports.cache = async function (ctx) {
-    console.log("CACHE PLUGIN INSTALLED...");
-    await ctx.model({
-        name: 'request_history',
-        database: "store",
-        schema: {
-            model: {
-                type: "string",
-                required: true,
-                uniqueGroup: ["limit"]
-            },
-            method: {
-                type: "string",
-                required: true,
-                uniqueGroup: ["limit"]
-            },
-            hash: {
-                type: "string",
-                required: true,
-                uniqueGroup: ["limit"]
-            },
-        },
-        lifecycle: {
-            create: {
-                role: ["system"],
-                modify: []
-            },
-            read: {
-                role: ["system"]
-            },
-            update: {
-                role: ["system"]
-            },
-            delete: {
-                role: ["system"]
-            },
-            count: {
-                role: ["system"]
-            }
-        }
-    })
-}
-
-
-module.exports.client = function (selected_db) {
+module.exports = function (selected_db) {
     return async function (ctx) {
+        await ctx.axios.post(process.env.CACHE, {
+            model: "model",
+            method: "create",
+            token: process.env.SYSTEM_TOKEN,
+            body: {
+                name: 'request_history',
+                database: "store",
+                schema: {
+                    model: {
+                        type: "string",
+                        required: true,
+                        uniqueGroup: ["limit"]
+                    },
+                    method: {
+                        type: "string",
+                        required: true,
+                        uniqueGroup: ["limit"]
+                    },
+                    hash: {
+                        type: "string",
+                        required: true,
+                        uniqueGroup: ["limit"]
+                    },
+                },
+                lifecycle: {
+                    create: {
+                        role: ["system"],
+                    },
+                    read: {
+                        role: ["system"]
+                    },
+                    update: {
+                        role: ["system"]
+                    },
+                    delete: {
+                        role: ["system"]
+                    },
+                    count: {
+                        role: ["system"]
+                    }
+                }
+            }
+        })
         await ctx.model({
             name: 'limit',
             database: selected_db,
@@ -87,8 +86,8 @@ module.exports.client = function (selected_db) {
             name: "check_limit",
             function: async function (payload, ctx, state) {
                 try {
+                    if (payload.token === process.env.SYSTEM_TOKEN || payload.token === true) { return true }
                     if (payload.method == "read" && payload.model == "limit") { return true }
-
                     const limit_req = await ctx.run({
                         token: true,
                         model: "limit",
@@ -122,6 +121,7 @@ module.exports.client = function (selected_db) {
                         return false
                     }
                 } catch (error) {
+                    console.log(error);
                 }
                 return true
             }
