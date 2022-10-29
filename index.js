@@ -46,7 +46,7 @@ module.exports = function (selected_db) {
         await ctx.model({
             name: 'limit',
             database: selected_db,
-            mixin: ["cache"],
+            mixins: ["cache"],
             schema: {
                 model: {
                     type: "string",
