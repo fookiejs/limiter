@@ -1,19 +1,41 @@
 {
-  "name": "fookie-limiter",
-  "version": "0.1.1",
-  "description": "s",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/fookiejs/limiter.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/fookiejs/limiter/issues"
-  },
-  "homepage": "https://github.com/fookiejs/limiter#readme"
+    "name": "fookie-limiter",
+    "version": "0.999.3",
+    "description": "Request limiter plugin for Fookie JS",
+    "main": "dist/index.js",
+    "scripts": {
+        "test": "vitest",
+        "coverage": "vitest run --coverage",
+        "build": "tsc",
+        "lint": "npx eslint packages"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/fookiejs/fookie-server.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/fookiejs/fookie-server/issues"
+    },
+    "homepage": "https://github.com/fookiejs/fookie-server#readme",
+    "devDependencies": {
+        "@types/lodash": "^4.14.191",
+        "@types/node": "^18.15.11",
+        "@typescript-eslint/eslint-plugin": "^5.56.0",
+        "@typescript-eslint/parser": "^5.56.0",
+        "@vitest/coverage-istanbul": "^0.29.3",
+        "@vitest/ui": "^0.29.3",
+        "eslint": "^8.36.0",
+        "fookie": "^0.999.29",
+        "typescript": "^5.2.2",
+        "vitest": "^0.29.3"
+    },
+    "peerDependencies": {
+        "fookie": "0.999.29"
+    },
+    "dependencies": {
+        "crypto-js": "^4.1.1"
+    }
 }

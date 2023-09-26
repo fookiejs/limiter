@@ -1,0 +1,18 @@
+# Direktörler
+node_modules/
+test/
+tests/
+__tests__/
+
+# Dosyalar
+*.tsx
+*.log
+*.md
+*.markdown
+yarn.lock
+npm-debug.log
+coverage
+.github
+packages
+.prettierrc.yaml
+vitest.config

@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "declaration": true,
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "module": "commonjs",
+        "target": "es6",
+        "outDir": "./dist"
+    },
+
+    "include": ["packages/**/*", "index.ts"],
+    "exclude": ["test", "node_modules"]
+}
